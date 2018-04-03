@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import Master from '../assets/master-hog.png'
 import BabyHog from '../components/BabyHog'
+import offspring from '../db'
 
 class MasterHog extends Component {
 
@@ -11,15 +12,23 @@ class MasterHog extends Component {
       eyeColor: "blue",
       name: "Master Blaster",
       weight: '2.54 Tons',
-      offspring: []
+      offspring: offspring.offspring
     }
   }
 
-
-  changeEyeColor(event) {
-    event.preventDefault()
-
+  getBabyHogs() {
+    const babyHogs = this.state.offspring.map(hog => {
+      return <BabyHog key={hog.id} eyeColor ={this.state.eyeColor} hog={hog} />
+    })
+    return babyHogs
   }
+
+  changeEyeColor = (event) => {
+    event.preventDefault()
+    this.setState({
+      eyeColor: event.target.value
+    })
+   }
 
 
   render() {
@@ -31,19 +40,19 @@ class MasterHog extends Component {
             type="radio"
             name="eyeColor"
             value="blue"
-            onChange={this.changeEyeColor.bind(this)}>
+            onChange={this.changeEyeColor}>
           </input> Blue<br></br>
           <input
             type="radio"
             name="eyeColor"
             value="sun"
-            onChange={this.changeEyeColor.bind(this)}>
+            onChange={this.changeEyeColor}>
           </input> Sun<br></br>
           <input
             type="radio"
             name="eyeColor"
             value="glowing"
-            onChange={this.changeEyeColor.bind(this)}>
+            onChange={this.changeEyeColor}>
           </input> Glowing<br></br>
         </form>
 
@@ -55,7 +64,7 @@ class MasterHog extends Component {
           <img id="master-blaster" src={Master} alt='MasterBlaster' style={{height: 400}}></img>
         </div>
         <ul className="hoglist">
-          {/* render hog babies */}
+          {this.getBabyHogs()}
         </ul>
 
       </div>
