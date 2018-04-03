@@ -6,18 +6,16 @@ import '../App.css'
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-    }
+    this.state = {Offspring}
   }
 
   render() {
     return (
       <div className="App">
-        
+        <MasterHog offspring={this.state}/>
       </div>
     )
   }
-
 }
 
 export default App
