@@ -11,19 +11,20 @@ class MasterHog extends Component {
       eyeColor: "blue",
       name: "Master Blaster",
       weight: '2.54 Tons',
-      offspring: []
+      offspring: props.data.offspring
     }
   }
 
 
   changeEyeColor(event) {
     event.preventDefault()
-
+    this.setState({eyeColor: event.target.value})
   }
 
 
   render() {
-    return (
+    const babyArray = this.state.offspring.map( baby => { return <BabyHog baby={baby} eyeColor={this.state.eyeColor} /> } )
+      return (
       <div>
 
         <form>
@@ -55,7 +56,7 @@ class MasterHog extends Component {
           <img id="master-blaster" src={Master} alt='MasterBlaster' style={{height: 400}}></img>
         </div>
         <ul className="hoglist">
-          {/* render hog babies */}
+          {babyArray}
         </ul>
 
       </div>
