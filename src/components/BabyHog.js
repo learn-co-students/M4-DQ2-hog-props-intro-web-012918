@@ -15,21 +15,27 @@ class BabyHog extends Component {
 
   constructor(props) {
     super(props)
+    console.log("inside baby hog");
+    console.log("props are", props);
+    console.log("--------");
     this.state = {
-
+      name: this.props.name,
+      weight: this.props.weight,
+      eyeColor: this.props.eyeColor
     }
   }
 
   selectImg() {
 
+    return imgMapper[this.props.eyeColor]
   }
 
   changeWeight(event) {
     event.preventDefault()
-
   }
 
   render() {
+
     return (
         <li className="hogbabies">
           <h1>{this.state.name}</h1>
@@ -52,7 +58,7 @@ class BabyHog extends Component {
           </div>
 
 
-          <img src="{/* give correct img source component based on eyecolor prop */}" style={{height: `${this.state.imgHeight}px`}} alt="MasterBlasterJrJr" />
+          <img src={this.selectImg()} style={{height: `${this.state.imgHeight}px`}} alt="MasterBlasterJrJr" />
 
 
         </li>
